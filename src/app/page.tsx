@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import PokemonSprite from "@/lib/pokemon-sprite";
 import { getPokemon, Pokemon } from "@/sdk/pokeapi";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 
@@ -22,7 +22,7 @@ async function Pokedex() {
     : await getPokemon(0);
 
   const nextPokemon = await getPokemon(currentPokemon.dexNumber);
-  const previousPokemon = await getPokemon(currentPokemon.dexNumber - 2);
+  // const previousPokemon = await getPokemon(currentPokemon.dexNumber - 2);
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -36,7 +36,7 @@ async function Pokedex() {
           />
         </div>
       )}
-      {previousPokemon && (
+      {/* {previousPokemon && (
         <div className="hidden">
           <PokemonSprite
             key={previousPokemon.dexNumber}
@@ -44,7 +44,7 @@ async function Pokedex() {
             className="w-64 h-64"
           />
         </div>
-      )}
+      )} */}
       <Card className="w-80 p-4">
         <CardHeader>
           <CardTitle className="text-center text-2xl capitalize">
@@ -60,7 +60,7 @@ async function Pokedex() {
         </CardContent>
         <CardFooter className="flex justify-center">
           <form>
-            {previousPokemon && (
+            {/* {previousPokemon && (
               <Button
                 formAction={async () => {
                   "use server";
@@ -70,7 +70,7 @@ async function Pokedex() {
               >
                 <ChevronLeft />
               </Button>
-            )}
+            )} */}
 
             {nextPokemon && (
               <Button
