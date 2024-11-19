@@ -27,20 +27,24 @@ async function Pokedex() {
   return (
     <div className="flex justify-center items-center h-screen">
       {/* Render next two images in hidden divs so they load faster */}
-      <div className="hidden">
-        <PokemonSprite
-          key={nextPokemon.dexNumber}
-          pokemon={nextPokemon}
-          className="w-64 h-64"
-        />
-      </div>
-      <div className="hidden">
-        <PokemonSprite
-          key={previousPokemon.dexNumber}
-          pokemon={previousPokemon}
-          className="w-64 h-64"
-        />
-      </div>
+      {nextPokemon && (
+        <div className="hidden">
+          <PokemonSprite
+            key={nextPokemon.dexNumber}
+            pokemon={nextPokemon}
+            className="w-64 h-64"
+          />
+        </div>
+      )}
+      {previousPokemon && (
+        <div className="hidden">
+          <PokemonSprite
+            key={previousPokemon.dexNumber}
+            pokemon={previousPokemon}
+            className="w-64 h-64"
+          />
+        </div>
+      )}
       <Card className="w-80 p-4">
         <CardHeader>
           <CardTitle className="text-center text-2xl capitalize">
@@ -56,25 +60,29 @@ async function Pokedex() {
         </CardContent>
         <CardFooter className="flex justify-center">
           <form>
-            <Button
-              formAction={async () => {
-                "use server";
-                const jar = await cookies();
-                jar.set("currentPokemon", JSON.stringify(previousPokemon));
-              }}
-            >
-              <ChevronLeft />
-            </Button>
+            {previousPokemon && (
+              <Button
+                formAction={async () => {
+                  "use server";
+                  const jar = await cookies();
+                  jar.set("currentPokemon", JSON.stringify(previousPokemon));
+                }}
+              >
+                <ChevronLeft />
+              </Button>
+            )}
 
-            <Button
-              formAction={async () => {
-                "use server";
-                const jar = await cookies();
-                jar.set("currentPokemon", JSON.stringify(nextPokemon));
-              }}
-            >
-              <ChevronRight />
-            </Button>
+            {nextPokemon && (
+              <Button
+                formAction={async () => {
+                  "use server";
+                  const jar = await cookies();
+                  jar.set("currentPokemon", JSON.stringify(nextPokemon));
+                }}
+              >
+                <ChevronRight />
+              </Button>
+            )}
           </form>
         </CardFooter>
       </Card>
