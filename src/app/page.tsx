@@ -90,10 +90,28 @@ async function Pokedex() {
   );
 }
 
+const Skeleton = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="w-80 p-4 border rounded-lg bg-gray-100">
+      <div className="text-center text-2xl capitalize h-8 bg-gray-300 rounded w-2/3 mx-auto mb-4 animate-pulse" />
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-64 h-64 border rounded-lg bg-gray-200 animate-pulse" />
+        <div className="w-full h-48 bg-gray-200 rounded animate-pulse" />
+      </div>
+      <div className="flex justify-center mt-4">
+        <div className="flex gap-4">
+          <div className="w-10 h-10 bg-gray-300 rounded-full animate-pulse" />
+          <div className="w-10 h-10 bg-gray-300 rounded-full animate-pulse" />
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 export default function Home() {
   return (
     <div className="container mx-auto px-4">
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Skeleton />}>
         <Pokedex />
       </Suspense>
     </div>

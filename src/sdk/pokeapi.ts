@@ -92,17 +92,10 @@ export async function getAllPokemon() {
   }));
 }
 
-// import { connection } from "next/server";
+import { connection } from "next/server";
 
 export async function getPokemon(index: number) {
+  await connection();
   const allPokemon = await getAllPokemon();
   return allPokemon[index];
 }
-
-// export async function getTwoRandomPokemon() {
-//   await connection(); // Next needed some help knowing this is dynamic
-
-//   const allPokemon = await getAllPokemon();
-//   const shuffled = allPokemon.sort(() => 0.5 - Math.random());
-//   return shuffled.slice(0, 2);
-// }
