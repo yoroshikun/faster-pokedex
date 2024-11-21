@@ -92,10 +92,10 @@ export async function getAllPokemon() {
   }));
 }
 
-import { connection } from "next/server";
-
 export async function getPokemon(index: number) {
-  await connection();
+  "use cache";
+  unstable_cacheLife("forever");
+
   const allPokemon = await getAllPokemon();
   return allPokemon[index];
 }
